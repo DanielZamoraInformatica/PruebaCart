@@ -1,0 +1,15 @@
+stages:
+  - test
+
+selenium_test:
+  image: python:3.10
+  stage: test
+  before_script:
+    - apt-get update && apt-get install -y chromium-driver chromium
+    - pip install -r requirements.txt
+  script:
+    - python3 -m unittest discover -s tests
+  artifacts:
+    paths:
+      - screenshots/
+    expire_in: 1 day
